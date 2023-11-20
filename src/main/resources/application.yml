@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@127.0.0.1:1521:XE
+    username: dding
+    password: 1234
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+server:
+  port: 40045
