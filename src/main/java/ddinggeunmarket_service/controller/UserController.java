@@ -15,6 +15,12 @@ public class UserController {
 
     private final UserService userService;
 
+
+    @GetMapping("/login")
+    public User login(UserDTO userDTO) {
+        return userService.login(userDTO.getId(), userDTO.getPassword());
+    }
+
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return userService.getAllUsers();

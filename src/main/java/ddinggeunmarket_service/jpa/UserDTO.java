@@ -7,7 +7,17 @@ import lombok.Data;
 @Data
 public class UserDTO {
 
-    private int id;
+//    public UserDTO(int id, String password, String phoneNumb, String dob, String email, String address, String name) {
+//        this.setId(id);
+//        this.setPassword(password);
+//        this.setPhoneNumb(phoneNumb);
+//        this.setDob(dob);
+//        this.setEmail(email);
+//        this.setAddress(address);
+//        this.setName(name);
+//    }
+
+    private String id;
     private String phoneNumb;
     private String password;
     private String dob;

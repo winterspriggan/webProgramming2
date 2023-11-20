@@ -30,7 +30,7 @@ public class User {
 
     @Id
     @Column(name = "ID")
-    private int id;
+    private String id;
     @Column(name = "PASSWORD")
     private String password;
     @Column(name = "PHONENUMB")

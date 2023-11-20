@@ -14,6 +14,17 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
+    @Override
+    public User login(String id, String password) {
+        System.out.println(id + " " + password);
+        String userPw = userRepository.getUserById(id).getPassword();
+        if (userPw == null || !userPw.equals(password)) {
+            return null;
+        }
+        return userRepository.getUserById(id);
+    }
+
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -27,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(String id) {
-        return userRepository.getBoardById(id);
+        return userRepository.getUserById(id);
     }
 
     @Override
