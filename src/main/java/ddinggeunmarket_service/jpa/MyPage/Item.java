@@ -18,6 +18,6 @@ public class Item {
 
     private String itemName;
 
-    @ManyToMany(mappedBy = "interestList")
-    private List<User> interestedUsers;
+//    @ManyToMany(mappedBy = "interestList")
+//    private List<User> interestedUsers;
 }
