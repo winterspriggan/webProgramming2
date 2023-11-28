@@ -1,10 +1,15 @@
 package ddinggeunmarket_service.service;
 
 
-import ddinggeunmarket_service.jpa.User;
-import ddinggeunmarket_service.jpa.UserDTO;
-import ddinggeunmarket_service.jpa.UserRepository;
+import ddinggeunmarket_service.jpa.MyPage.Item;
+import ddinggeunmarket_service.jpa.MyPage.ItemRepository;
+import ddinggeunmarket_service.jpa.MyPage.WishList;
+import ddinggeunmarket_service.jpa.MyPage.WishListRepository;
+import ddinggeunmarket_service.jpa.user.User;
+import ddinggeunmarket_service.jpa.user.UserDTO;
+import ddinggeunmarket_service.jpa.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +19,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
+    @Autowired
+    private ItemRepository itemRepository;
+    @Autowired
+    private WishListRepository wishListRepository;
 
     @Override
     public User login(String id, String password) {
@@ -56,5 +66,21 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
         return true;
+    }
+
+
+    public void addWishList(String userId, Long itemId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
+
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new IllegalArgumentException("Item not found with id: " + itemId));
+
+
+        WishList wishList = new WishList();
+        wishList.setUser(user);
+        wishList.setItem(item);
+
+        wishListRepository.save(wishList);
     }
 }

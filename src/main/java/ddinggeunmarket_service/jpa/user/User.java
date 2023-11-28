@@ -1,4 +1,4 @@
-package ddinggeunmarket_service.jpa;
+package ddinggeunmarket_service.jpa.user;
 
 
 import jakarta.persistence.Column;

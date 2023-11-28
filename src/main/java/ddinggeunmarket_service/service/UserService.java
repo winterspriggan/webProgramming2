@@ -1,7 +1,7 @@
 package ddinggeunmarket_service.service;
 
-import ddinggeunmarket_service.jpa.User;
-import ddinggeunmarket_service.jpa.UserDTO;
+import ddinggeunmarket_service.jpa.user.User;
+import ddinggeunmarket_service.jpa.user.UserDTO;
 
 import java.util.List;
 
@@ -17,4 +17,6 @@ public interface UserService {
     User updateUser(UserDTO userDTO);
 
     boolean deleteUserById(String id);
+
+    void addWishList(String userId, Long itemId);
 }
