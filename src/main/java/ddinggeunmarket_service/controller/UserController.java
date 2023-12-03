@@ -24,13 +24,11 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-//    private final PostService postService;
-//    private final SimpMessageSendingOperations sendingOperations;
-//    private final ChatService chatService;
 
 
     @GetMapping("/login")
     public User login(UserDTO userDTO) {
+        System.out.println(userDTO.getId() +" " +userDTO.getPassword());
         return userService.login(userDTO.getId(), userDTO.getPassword());
     }
 
@@ -41,6 +39,7 @@ public class UserController {
 
     @PostMapping("/user/create")
     public User createUser(@RequestBody UserDTO userDTO) {
+        System.out.println("id : " + userDTO.getId());
         return userService.createUser(userDTO);
     }
 
