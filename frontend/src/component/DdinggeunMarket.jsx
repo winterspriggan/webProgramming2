@@ -9,7 +9,7 @@ export default function DdinggeunMarket() {
     const [customer, setCustomer] = useState(null);
 
     return (
-        // <Login setAuthenticated={setAuthenticated} setCustomer={setCustomer}/>
-        <Register/>
+        <Login setAuthenticated={setAuthenticated} setCustomer={setCustomer}/>
+        // <Register/>
     );
 }
