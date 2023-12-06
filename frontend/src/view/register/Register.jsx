@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import './Register.css';
 import axios from "axios";
 import swal from 'sweetalert'
-import TextInput from "../../TextInput/TextInput";
-import Button from "../../Button/Button";
+import TextInput from "../../component/TextInput/TextInput";
+import Button from "../../component/Button/Button";
 // import Login from "../login/Login";
 
 export default function Register() {
@@ -15,6 +15,7 @@ export default function Register() {
     const [email, setEmail] = useState('');
     const [address, setAddress] = useState('');
     const [name, setName] = useState('');
+    const [currentPage, setCurrentPage] = useState('login');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -55,6 +56,10 @@ export default function Register() {
             });
     };
 
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
     return (
         <body>
         <div className="login-space">
@@ -69,7 +74,7 @@ export default function Register() {
                 <TextInput text={'주소'} value={address} onChange={(e) => setAddress(e.target.value)}/>
                 <TextInput text={'이름'} value={name} onChange={(e) => setName(e.target.value)}/>
 
-                <Button text={'가입하기'}/>
+                <Button text={'가입하기'} />
             </form>
         </div>
         </body>

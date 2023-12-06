@@ -1,25 +1,26 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './Login.css';
-import axios from "axios";
-import swal from 'sweetalert'
-import TextInput from "../../TextInput/TextInput";
-import Button from "../../Button/Button";
-import register from "../register/Register"
+import axios from 'axios';
+import swal from 'sweetalert';
+import TextInput from '../../component/TextInput/TextInput';
+import Button from '../../component/Button/Button';
+import Register from '../register/Register';
 
-export default function Login({setAuthenticated, setCustomer}) {
-
+export default function Login({ setAuthenticated, setCustomer }) {
     const [userId, setUserId] = useState('');
     const [userPassword, setUserPassword] = useState('');
+    const [currentPage, setCurrentPage] = useState('login');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.get('http://localhost:40040/login', {
-            params: {
-                id: userId,
-                password: userPassword,
-            }
-        })
-            .then(response => {
+        axios
+            .get('http://localhost:40040/login', {
+                params: {
+                    id: userId,
+                    password: userPassword,
+                },
+            })
+            .then((response) => {
                 if (response.data === '')
                     swal({
                         title: '로그인 실패',
@@ -35,13 +36,13 @@ export default function Login({setAuthenticated, setCustomer}) {
                         button: '확인',
                     });
                     setCustomer({
-                        "id": response.data.id,
-                        "name": response.data.name,
+                        id: response.data.id,
+                        name: response.data.name,
                     });
                     setAuthenticated(true);
                 }
             })
-            .catch(e => {
+            .catch((e) => {
                 swal({
                     title: '시스템 오류',
                     text: '잠시후 다시 시도해주세요. 불편을 드려 죄송합니다.',
@@ -51,18 +52,35 @@ export default function Login({setAuthenticated, setCustomer}) {
             });
     };
 
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
     return (
         <body>
         <div className="login-space">
             <h2>띵근마켓 로그인</h2>
-            <form onSubmit={handleSubmit}>
-                <TextInput text={'아이디'} value={userId} onChange={(e) => setUserId(e.target.value)}/>
-                <TextInput text={'비밀번호'} type={'password'} value={userPassword}
-                           onChange={(e) => setUserPassword(e.target.value)}/>
-                <Button text={'로그인'}/>
-                <Button text={'회원가입'} onClick={register}/>
-            </form>
+            {currentPage === 'login' && (
+                <form onSubmit={handleSubmit}>
+                    <TextInput
+                        text={'아이디'}
+                        value={userId}
+                        onChange={(e) => setUserId(e.target.value)}
+                    />
+                    <TextInput
+                        text={'비밀번호'}
+                        type={'password'}
+                        value={userPassword}
+                        onChange={(e) => setUserPassword(e.target.value)}
+                    />
+                    <Button text={'로그인'} onClick={() => handlePageChange('login')}/>
+                </form>
+            )}
+            {currentPage === 'register' && <Register />}
+            <Button text={'회원가입'} onClick={() => handlePageChange('register')} />
         </div>
         </body>
     );
 }
+
+

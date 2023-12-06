@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Login from '../view/login/Login';
-import Register from "../view/register/Register";
+
+
 
 
 export default function DdinggeunMarket() {
@@ -10,6 +11,5 @@ export default function DdinggeunMarket() {
 
     return (
         <Login setAuthenticated={setAuthenticated} setCustomer={setCustomer}/>
-        // <Register/>
     );
 }
