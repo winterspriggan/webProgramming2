@@ -6,3 +6,12 @@ spring:
     driver-class-name: oracle.jdbc.driver.OracleDriver
 server:
   port: 40040
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/**/**.xml
+  configuration:
+    cache-enabled: false
+    jdbc-type-for-null: NULL
+logging:
+  level:
+    org.springframework: debug
+    org.springframework.web: debug
