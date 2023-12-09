@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 목록보기</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        td, h2 {
+            text-align: center;
+        }
+    </style>
+    <script th:inline="javascript">
+
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                document.location.reload();
+            }
+        };
+    </script>
+</head>
+<body>
+<h2>게시판 글목록</h2>
+
+
+<form action="/listForm" method="get">
+    <input type="text" name="search" placeholder="검색어 입력" th:value="${param.search}">
+    <input type="submit" value="검색">
+</form>
+
+<table width="500" cellpadding="0" cellspacing="0" border="1">
+    <tr>
+        <th>번호</th>
+        <th>이름</th>
+        <th>제목</th>
+        <th>날짜</th>
+        <th>조회수</th>
+        <th>좋아요</th>
+    </tr>
+
+    <tr th:each="dto : ${list}">
+
+        <th:block th:with="searchTerm=${param.search}">
+
+            <th:block th:if="${searchTerm == null or searchTerm == '' or #strings.containsIgnoreCase(dto.board_title, searchTerm)}">
+                <td th:text="${dto.board_idx}"></td>
+                <td th:text="${dto.board_name}"></td>
+                <td>
+                    <a th:href="'contentForm?board_idx=' + ${dto.board_idx}" th:text="${dto.board_title}"></a>
+                </td>
+                <td>
+                    <span th:with="dateVar=${dto.board_date}" th:text="${#dates.format(dateVar, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                </td>
+                <td th:text="${dto.board_hit}"></td>
+                <td th:text="${dto.board_likes}"></td>
+            </th:block>
+        </th:block>
+    </tr>
+
+    <tr>
+        <td colspan="5"><a href="writeForm">글작성</a></td>
+    </tr>
+</table>
+</body>
+</html>
