@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="ddinggeunmarket_service.BoardDao.ISubReplyDao">
+    <select id="sub_reply_list" resultType="ddinggeunmarket_service.BoardDto.SubReplyDto">
+        SELECT * FROM sub_reply WHERE sub_reply_reply_idx =#{param1} ORDER BY sub_reply_date asc
+    </select>
+
+    <insert id="sub_reply_write">
+        INSERT INTO sub_reply (sub_reply_idx, sub_reply_name, sub_reply_content, sub_reply_date, sub_reply_reply_idx)
+        VALUES (sub_reply_seq.nextval, #{param1}, #{param2}, sysdate, #{param3})
+    </insert>
+	<select id="viewDto" resultType="ddinggeunmarket_service.BoardDto.BoardDto">
+		select * from board where board_idx=#{ param1 }
+	
+	</select>
+    <delete id="sub_reply_deleteDto">
+        DELETE FROM sub_reply WHERE sub_reply_idx = #{param1}
+    </delete>
+	<update id="sub_reply_update">
+    update reply set reply_content=#{param2} where sub_reply_reply_idx=#{param1}
+	</update>
+	
+	
+	
+</mapper>
