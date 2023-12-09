@@ -48,6 +48,12 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+
+    implementation group: 'com.oracle.ojdbc', name: 'orai18n', version: '19.3.0.0'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 
 
 //    compileOnly'org.projectlombok:lombok:1.18.12'
