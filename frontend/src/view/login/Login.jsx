@@ -5,6 +5,7 @@ import swal from 'sweetalert';
 import TextInput from '../../component/TextInput/TextInput';
 import Button from '../../component/Button/Button';
 import Register from '../register/Register';
+import {Link} from "react-router-dom";
 
 export default function Login({ setAuthenticated, setCustomer }) {
     const [userId, setUserId] = useState('');
@@ -73,11 +74,16 @@ export default function Login({ setAuthenticated, setCustomer }) {
                         value={userPassword}
                         onChange={(e) => setUserPassword(e.target.value)}
                     />
+
                     <Button text={'로그인'} onClick={() => handlePageChange('login')}/>
+                    <Link to={"/register"}>
+                        <Button text={'회원가입'}/>
+                    </Link>
                 </form>
             )}
-            {currentPage === 'register' && <Register />}
-            <Button text={'회원가입'} onClick={() => handlePageChange('register')} />
+            {/*{currentPage === 'register' && <Register />}*/}
+            {/*<Button text={'회원가입'} onClick={() => handlePageChange('register')} />*/}
+
         </div>
         </body>
     );

@@ -4,7 +4,7 @@ import axios from "axios";
 import swal from 'sweetalert'
 import TextInput from "../../component/TextInput/TextInput";
 import Button from "../../component/Button/Button";
-// import Login from "../login/Login";
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
 
@@ -16,6 +16,11 @@ export default function Register() {
     const [address, setAddress] = useState('');
     const [name, setName] = useState('');
     const [currentPage, setCurrentPage] = useState('login');
+    const navigate = useNavigate();
+
+
+
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -44,7 +49,9 @@ export default function Register() {
                         icon: 'success',
                         button: '확인',
                     });
+
                 }
+                navigate('/');
             })
             .catch(e => {
                 swal({
@@ -54,6 +61,7 @@ export default function Register() {
                     button: '확인',
                 });
             });
+
     };
 
     const handlePageChange = (page) => {
@@ -63,6 +71,7 @@ export default function Register() {
     return (
         <body>
         <div className="login-space">
+
             <h2>띵근마켓 회원가입</h2>
             <form onSubmit={handleSubmit}>
                 <TextInput text={'아이디'} value={id} onChange={(e) => setId(e.target.value)}/>
@@ -74,7 +83,7 @@ export default function Register() {
                 <TextInput text={'주소'} value={address} onChange={(e) => setAddress(e.target.value)}/>
                 <TextInput text={'이름'} value={name} onChange={(e) => setName(e.target.value)}/>
 
-                <Button text={'가입하기'} />
+                <Button text={'가입하기'}/>
             </form>
         </div>
         </body>
