@@ -43,6 +43,10 @@ public class UserServiceImpl implements UserService {
            return userRepository.save(user);
     }
 
+    public void kakaoLogout() {
+
+    }
+
 
 
     @Override
@@ -59,6 +63,7 @@ public class UserServiceImpl implements UserService {
         if(userRepository.save(user) != null) return user;
         else return null;
     }
+
 
     @Override
     public User getUserById(String id) {

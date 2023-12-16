@@ -1,5 +1,6 @@
 package ddinggeunmarket_service.controller;
 
+import ddinggeunmarket_service.jpa.user.User;
 import ddinggeunmarket_service.jpa.user.kakao.KakaoTokenResponse;
 import ddinggeunmarket_service.jpa.user.kakao.KakaoUserInfo;
 import ddinggeunmarket_service.jpa.user.kakao.KakaoUserInfoResponse;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins ="http://localhost:40040")
 @RestController
 @RequiredArgsConstructor
-public class KakaoLoginController {
+public class KakaoController {
 
     private final KakaoUserInfo kakaoUserInfo;
     private final KakaoTokenJsonData kakaoTokenJsonData;
@@ -23,7 +24,7 @@ public class KakaoLoginController {
 
 
     @GetMapping("/kakao/login")
-    public String getAccessToken(@RequestParam("code") String code) {
+    public String kakaoLogin(@RequestParam("code") String code) {
         System.out.println("인가 코드 ->  엑세스 토큰");
         KakaoTokenResponse kakaoTokenResponse = kakaoTokenJsonData.getToken(code);
         System.out.println("토큰 : "+ kakaoTokenResponse);
@@ -32,5 +33,10 @@ public class KakaoLoginController {
         userService.accessByKakao(userInfo.getKakao_account().getEmail() , userInfo.getKakao_account().getNickname());
         return "good";
     }
-
+    @GetMapping("/kakao/logout")
+    public User logout() {
+        if(kakaoTokenJsonData.logout() != null) {
+            return new User;
+        }
+    }
 }
