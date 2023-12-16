@@ -4,6 +4,9 @@ spring:
     username: dding
     password: 1234
     driver-class-name: oracle.jdbc.driver.OracleDriver
+  profiles:
+    include: private
+
 server:
   port: 40040
 mybatis:

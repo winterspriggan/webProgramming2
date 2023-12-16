@@ -2,14 +2,16 @@ package ddinggeunmarket_service.controller;
 
 import ddinggeunmarket_service.jpa.chat.ChatMessage;
 import ddinggeunmarket_service.jpa.chat.ChatRoom;
-import ddinggeunmarket_service.jpa.community.Post;
+//import ddinggeunmarket_service.jpa.community.Post;
 import ddinggeunmarket_service.jpa.user.User;
 import ddinggeunmarket_service.jpa.user.UserDTO;
 import ddinggeunmarket_service.service.ChatService;
-import ddinggeunmarket_service.service.PostService;
+//import ddinggeunmarket_service.service.PostService;
 import ddinggeunmarket_service.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
@@ -31,6 +33,7 @@ public class UserController {
         System.out.println(userDTO.getId() +" " +userDTO.getPassword());
         return userService.login(userDTO.getId(), userDTO.getPassword());
     }
+
 
     @GetMapping("/users")
     public List<User> getAllUsers() {

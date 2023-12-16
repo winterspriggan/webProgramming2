@@ -4,8 +4,9 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import TextInput from '../../component/TextInput/TextInput';
 import Button from '../../component/Button/Button';
-import Register from '../register/Register';
+// import Register from '../register/Register';
 import {Link} from "react-router-dom";
+import { SocialKakao } from "./KakaoLogin.jsx";
 
 export default function Login({ setAuthenticated, setCustomer }) {
     const [userId, setUserId] = useState('');
@@ -53,6 +54,8 @@ export default function Login({ setAuthenticated, setCustomer }) {
             });
     };
 
+
+
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
@@ -83,7 +86,7 @@ export default function Login({ setAuthenticated, setCustomer }) {
             )}
             {/*{currentPage === 'register' && <Register />}*/}
             {/*<Button text={'회원가입'} onClick={() => handlePageChange('register')} />*/}
-
+            <SocialKakao/>
         </div>
         </body>
     );

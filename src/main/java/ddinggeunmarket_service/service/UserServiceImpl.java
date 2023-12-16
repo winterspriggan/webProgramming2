@@ -28,12 +28,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(String id, String password) {
         System.out.println(id + " " + password);
+        if(id.contains("KAKAO_USER")) return null;
         String userPw = userRepository.getUserById(id).getPassword();
-        if (userPw == null || !userPw.equals(password)) {
-            return null;
-        }
+        if (userPw == null || !userPw.equals(password)) return null;
         return userRepository.getUserById(id);
     }
+
+
+    //KAKAO_USER_+nickname
+    @Override
+    public User accessByKakao(String email, String nickname) {
+        String kakaoId = "KAKAO_USER_"+email;
+            User user = new User(new UserDTO(kakaoId , "kakaoUser" , "kakaoUser" , "kakaoUser" , email , "kakaoUser" , "kakao"+nickname));
+           return userRepository.save(user);
+    }
+
+
 
     @Override
     public List<User> getAllUsers() {
@@ -42,6 +52,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserDTO userDTO) {
+        if(userDTO.getId().equals(userRepository.getUserById(userDTO.getId())) // id or email이 같으면 가입 불가
+                || userDTO.getEmail().equals(userRepository.getUserByEMail(userDTO.getEmail()))) return null;
+        if(userDTO.getId().contains("KAKAO_USER")) return null; //카카오 유저 형식의 아이디도 가입 불가
         User user = new User(userDTO);
         if(userRepository.save(user) != null) return user;
         else return null;
@@ -84,4 +97,6 @@ public class UserServiceImpl implements UserService {
 
         wishListRepository.save(wishList);
     }
+
+
 }
