@@ -64,13 +64,11 @@ const REDIRECT_URI = "http://localhost:40040/kakao/login";
 
 export const SocialKakao = () => {
     const handleLogin = () => {
-        // 현재 창에서 Kakao 로그인 페이지로 이동
         const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
         window.location.href = kakaoURL;
     };
 
     React.useEffect(() => {
-        // 현재 창으로 돌아왔을 때의 처리
         const handleCode = async () => {
             const code = new URL(window.location.href).searchParams.get("code");
             if (code) {
@@ -97,10 +95,8 @@ export const SocialKakao = () => {
             }
         };
 
-        // 페이지 로딩 시 한 번만 이벤트 리스너 등록
         window.addEventListener('load', handleCode);
 
-        // 컴포넌트 언마운트 시 이벤트 리스너 제거
         return () => {
             window.removeEventListener('load', handleCode);
         };
