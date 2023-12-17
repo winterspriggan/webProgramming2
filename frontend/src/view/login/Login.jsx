@@ -8,7 +8,7 @@ import Button from '../../component/Button/Button';
 import {Link} from "react-router-dom";
 import { SocialKakao } from "./KakaoLogin.jsx";
 
-export default function Login({ setAuthenticated, setCustomer }) {
+export default function Login({ setAuthenticated, setUser }) {
     const [userId, setUserId] = useState('');
     const [userPassword, setUserPassword] = useState('');
     const [currentPage, setCurrentPage] = useState('login');
@@ -37,7 +37,7 @@ export default function Login({ setAuthenticated, setCustomer }) {
                         icon: 'success',
                         button: '확인',
                     });
-                    setCustomer({
+                    setUser({
                         id: response.data.id,
                         name: response.data.name,
                     });
@@ -86,7 +86,7 @@ export default function Login({ setAuthenticated, setCustomer }) {
             )}
             {/*{currentPage === 'register' && <Register />}*/}
             {/*<Button text={'회원가입'} onClick={() => handlePageChange('register')} />*/}
-            <SocialKakao/>
+            <SocialKakao setAuthenticated={setAuthenticated} setUser={setUser}/>
         </div>
         </body>
     );

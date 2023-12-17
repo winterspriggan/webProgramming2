@@ -24,19 +24,20 @@ public class KakaoController {
 
 
     @GetMapping("/kakao/login")
-    public String kakaoLogin(@RequestParam("code") String code) {
+    public User kakaoLogin(@RequestParam("code") String code) {
         System.out.println("인가 코드 ->  엑세스 토큰");
         KakaoTokenResponse kakaoTokenResponse = kakaoTokenJsonData.getToken(code);
         System.out.println("토큰 : "+ kakaoTokenResponse);
         KakaoUserInfoResponse userInfo = kakaoUserInfo.getUserInfo(kakaoTokenResponse.getAccess_token());
         System.out.println("회원 정보 : " + userInfo);
-        userService.accessByKakao(userInfo.getKakao_account().getEmail() , userInfo.getKakao_account().getNickname());
-        return "good";
+     return userService.accessByKakao(userInfo.getKakao_account().getEmail() , userInfo.getKakao_account().getNickname());
     }
     @GetMapping("/kakao/logout")
     public User logout() {
         if(kakaoTokenJsonData.logout() != null) {
-            return new User;
+            return new User();
         }
+        return null;
     }
+
 }
