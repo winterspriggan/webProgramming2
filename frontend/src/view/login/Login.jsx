@@ -7,6 +7,7 @@ import Button from '../../component/Button/Button';
 // import Register from '../register/Register';
 import {Link} from "react-router-dom";
 import { SocialKakao } from "./KakaoLogin.jsx";
+import ExternalHtmlComponent from "../main/Main";
 
 export default function Login({ setAuthenticated, setUser }) {
     const [userId, setUserId] = useState('');

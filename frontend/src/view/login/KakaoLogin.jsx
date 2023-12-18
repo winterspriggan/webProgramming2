@@ -58,14 +58,16 @@
 import axios from "axios";
 import swal from "sweetalert";
 import React, {useState} from "react";
+import ExternalHtmlComponent from "../main/Main";
+import DdinggeunMarket from "../DdinggeunMarket";
+import {useNavigate} from "react-router-dom";
 
 const CLIENT_ID = "092b8dd8c678497e53440f488cc95702";
 const REDIRECT_URI = "http://localhost:40040/kakao/login";
 
 export const SocialKakao = ({ setAuthenticated, setUser }) => {
-    const userId  = useState('');
-    const email  = useState('');
-    const name  = useState('');
+
+    const navigate = useNavigate();
 
     const handleLogin = () => {
         const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
@@ -78,13 +80,7 @@ export const SocialKakao = ({ setAuthenticated, setUser }) => {
             const code = new URL(window.location.href).searchParams.get("code");
             if (code) {
                 try {
-                    const response = await axios.get('http://localhost:40040/kakao/login', {
-                        params: {
-                            id: userId,
-                            email: email,
-                            name: name
-                        },
-                    })
+                    const response = await axios.get('http://localhost:40040/kakao/login')
                 .then((response) => {
                         if (response.data !== '') {
                             swal({
@@ -98,6 +94,7 @@ export const SocialKakao = ({ setAuthenticated, setUser }) => {
                                 name: response.data.name,
                             });
                             setAuthenticated(true);
+                            window.location.href = "http://localhost:40040";
                         }
 
                         console.log('백엔드에서 받은 응답:', response.data);
@@ -109,10 +106,10 @@ export const SocialKakao = ({ setAuthenticated, setUser }) => {
         };
 
         window.addEventListener('load', handleCode);
-
-        return () => {
-            window.removeEventListener('load', handleCode);
-        };
+        //
+        // return () => {
+        //     window.removeEventListener('load', handleCode);
+        // };
     }, []);
 
     return (

@@ -1,26 +1,26 @@
 body {
     font-family: Arial;
-    background-color: #F0F0F0;
+    background-color: #A0F0A2;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 99vh;
     margin: 0;
 }
 
-.login-space {
+.register_space {
     background-color: #FFF;
     border: 1px solid #CCC;
     border-radius: 5px;
-    padding: 20px 80px;
+    padding: 20px 90px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 400px;
     width: 100%;
 }
 
 h2 {
-    color: #333;
+    color: #334;
 }
 
 .form {

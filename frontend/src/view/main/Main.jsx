@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-function ExternalHtmlComponent({customer}) {
+function ExternalHtmlComponent({user}) {
     const [htmlContent, setHtmlContent] = useState('');
 
     useEffect(() => {
