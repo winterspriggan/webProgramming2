@@ -51,10 +51,26 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping("/user/update")
-    public User updateUser(@RequestBody UserDTO userDTO) {
-        return userService.updateUser(userDTO);
+//    @PostMapping("/user/update")
+//    public User updateUser(@RequestBody UserDTO userDTO) {
+//        return userService.updateUser(userDTO);
+//    }
+///////mypage
+@PostMapping("/update")
+public ResponseEntity<?> updateUser(@RequestBody UserDTO userDTO) {
+    String userId = userDTO.getId();
+    if (userId == null || userId.isEmpty()) {
+        return ResponseEntity.badRequest().body("User ID cannot be null or empty");
     }
+
+    try {
+        User updatedUser = userService.updateUser(userDTO);
+        return ResponseEntity.ok(updatedUser);
+    } catch (IllegalArgumentException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+}
+////////
 
     @DeleteMapping("/user/{id}")
     public boolean deleteUserByID(@PathVariable String id) {
