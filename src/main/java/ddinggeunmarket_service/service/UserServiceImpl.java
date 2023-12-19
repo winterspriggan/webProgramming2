@@ -70,12 +70,31 @@ public class UserServiceImpl implements UserService {
         return userRepository.getUserById(id);
     }
 
+
+    //mypage
     @Override
     public User updateUser(UserDTO userDTO) {
-        User user = new User(userDTO);
-        return userRepository.save(user);
+        String userId = userDTO.getId();
+        if (userId == null || userId.isEmpty()) {
+            throw new IllegalArgumentException("User ID cannot be null or empty");
+        }
+
+        User existingUser = userRepository.getUserById(userId);
+        if (existingUser == null) {
+            throw new IllegalArgumentException("User not found with ID: " + userId);
+        }
+
+        existingUser.setPassword(userDTO.getPassword());
+        existingUser.setPhoneNumb(userDTO.getPhoneNumb());
+        existingUser.setDob(userDTO.getDob());
+        existingUser.setAddress(userDTO.getAddress());
+        existingUser.setEmail(userDTO.getEmail());
+        existingUser.setName(userDTO.getName());
+
+        return userRepository.save(existingUser);
     }
 
+////
     @Override
     public boolean deleteUserById(String id) {
         try {
@@ -89,12 +108,9 @@ public class UserServiceImpl implements UserService {
 
 
     public void addWishList(String userId, Long itemId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
-
+        User user = getUserById(userId);
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new IllegalArgumentException("Item not found with id: " + itemId));
-
 
         WishList wishList = new WishList();
         wishList.setUser(user);
